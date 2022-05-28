@@ -62,6 +62,45 @@
   >
     Add Employee
   </button>
+  <!-- End Nav Bar -->
+
+  <!-- Table -->
+  <table class="table table-hover mt-5">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of empList">
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.address }}</td>
+        <td>{{ employee.phone }}</td>
+        <td>{{ employee.designation }}</td>
+        <td>{{ employee.salary }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-success me-1"
+            data-bs-toggle="modal"
+            data-bs-target="#editEmployee"
+            (click)="editEmployee(employee)"
+          >
+            Update
+          </button>
+          <button type="button" class="btn btn-danger me-1" (click)="deleteEmployee(employee)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
   <!-- Add Employee Modal -->
   <div
@@ -85,7 +124,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form [formGroup]="empDetail">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label"
                 >Employee Name</label
@@ -95,6 +134,7 @@
                 class="form-control"
                 id="name"
                 aria-describedby="emailHelp"
+                formControlName="name"
               />
             </div>
             <div class="mb-3">
@@ -104,6 +144,7 @@
                 class="form-control"
                 id="email"
                 aria-describedby="emailHelp"
+                formControlName="email"
               />
             </div>
             <div class="mb-3">
@@ -113,6 +154,7 @@
                 class="form-control"
                 id="address"
                 aria-describedby="emailHelp"
+                formControlName="address"
               />
             </div>
             <div class="mb-3">
@@ -124,6 +166,7 @@
                 class="form-control"
                 id="phone"
                 aria-describedby="emailHelp"
+                formControlName="phone"
               />
             </div>
             <div class="mb-3">
@@ -135,6 +178,7 @@
                 class="form-control"
                 id="designation"
                 aria-describedby="emailHelp"
+                formControlName="designation"
               />
             </div>
             <div class="mb-3">
@@ -145,19 +189,141 @@
                 class="form-control"
                 id="salary"
                 aria-describedby="emailHelp"
+                formControlName="salary"
               />
             </div>
 
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-warning"
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                (click)="addEmployee()"
+              >
                 Add Employee
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Employee Modal -->
+
+  <!-- Edit Employee Modal -->
+  <div
+    class="modal fade"
+    id="editEmployee"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Update Employee Details
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="empDetail">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Employee Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                aria-describedby="emailHelp"
+                formControlName="name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                formControlName="email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                aria-describedby="emailHelp"
+                formControlName="address"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Phone No</label
+              >
+              <input
+                type="phone"
+                class="form-control"
+                id="phone"
+                aria-describedby="emailHelp"
+                formControlName="phone"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Designation</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="designation"
+                aria-describedby="emailHelp"
+                formControlName="designation"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Salary</label>
+              <input
+                type="number"
+                min="0"
+                class="form-control"
+                id="salary"
+                aria-describedby="emailHelp"
+                formControlName="salary"
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                (click)="updateEmployee()"
+                data-bs-dismiss="modal"
+              >
+                Update
               </button>
             </div>
           </form>
