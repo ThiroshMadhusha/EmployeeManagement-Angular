@@ -85,7 +85,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form [formGroup]="empDetail">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label"
                 >Employee Name</label
@@ -95,6 +95,7 @@
                 class="form-control"
                 id="name"
                 aria-describedby="emailHelp"
+                formControlName="name"
               />
             </div>
             <div class="mb-3">
@@ -104,6 +105,7 @@
                 class="form-control"
                 id="email"
                 aria-describedby="emailHelp"
+                formControlName="email"
               />
             </div>
             <div class="mb-3">
@@ -113,6 +115,7 @@
                 class="form-control"
                 id="address"
                 aria-describedby="emailHelp"
+                formControlName="address"
               />
             </div>
             <div class="mb-3">
@@ -124,6 +127,7 @@
                 class="form-control"
                 id="phone"
                 aria-describedby="emailHelp"
+                formControlName="phone"
               />
             </div>
             <div class="mb-3">
@@ -135,6 +139,7 @@
                 class="form-control"
                 id="designation"
                 aria-describedby="emailHelp"
+                formControlName="designation"
               />
             </div>
             <div class="mb-3">
@@ -145,6 +150,7 @@
                 class="form-control"
                 id="salary"
                 aria-describedby="emailHelp"
+                formControlName="salary"
               />
             </div>
 
@@ -156,7 +162,7 @@
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">
+              <button type="button" class="btn btn-primary" (click)="addEmployee()">
                 Add Employee
               </button>
             </div>
